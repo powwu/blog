@@ -1,4 +1,117 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2023-02-20T21:26:36-05:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">/powwu/blog</title><subtitle></subtitle><entry><title type="html">I have a blog now, I guess</title><link href="http://localhost:4000/blog/meta/2023/02/20/i-have-a-blog-now.html" rel="alternate" type="text/html" title="I have a blog now, I guess" /><published>2023-02-20T19:30:00-05:00</published><updated>2023-02-20T19:30:00-05:00</updated><id>http://localhost:4000/blog/meta/2023/02/20/i-have-a-blog-now</id><content type="html" xml:base="http://localhost:4000/blog/meta/2023/02/20/i-have-a-blog-now.html"><![CDATA[<h2 id="so-apparently-i-have-a-blog-now">So apparently I have a blog now.</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2023-03-29T12:35:11-04:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">/powwu/blog</title><subtitle></subtitle><entry><title type="html">V: The fusion programming language I didn’t know I needed</title><link href="http://localhost:4000/blog/programming/2023/03/29/vlang-shill.html" rel="alternate" type="text/html" title="V: The fusion programming language I didn’t know I needed" /><published>2023-03-29T01:00:00-04:00</published><updated>2023-03-29T01:00:00-04:00</updated><id>http://localhost:4000/blog/programming/2023/03/29/vlang-shill</id><content type="html" xml:base="http://localhost:4000/blog/programming/2023/03/29/vlang-shill.html"><![CDATA[<h4 id="as-many-of-you-know-the-programming-language-i-am-most-comfortable-with-is-go-however-just-because-a-language-is-comfortable-doesnt-mean-its-perfect-enter-v">As many of you know, the programming language I am most comfortable with is <a href="https://go.dev">Go</a>. However, just because a language is <em>comfortable</em> doesn’t mean it’s perfect. Enter <a href="https://vlang.io">V</a>.</h4>
+
+<p><img src="https://vlang.io/img/veasel.png" alt="" /></p>
+<center><i>V's incredibly adorable mascot, the Veasel.</i></center>
+
+<p><br /><br /></p>
+
+<h2 id="pros">Pros</h2>
+
+<p>Where do I even begin?</p>
+
+<h3 id="the-syntax">The syntax</h3>
+<p>According to their website, V’s syntax is about 80% identical to that of Go. Using the language, I believe it. Using V feels like Go on steroids sometimes. Here are some of the most important syntax changes for me:</p>
+
+<h4 id="--error-checks">- Error checks</h4>
+<p>In Go, error checks are frequent and bulky:</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">someFunction</span><span class="p">();</span>
+<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+     <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Compare this to V, which simplifies it to:</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="o">:=</span> <span class="n">someFunction</span><span class="p">()</span> <span class="n">or</span> <span class="p">{</span> <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>As you can see, much cleaner.</p>
+
+<p><br /></p>
+
+<h4 id="--checking-for-presence-in-an-array">- Checking for presence in an array</h4>
+<p>In Go, to check for a value in an array, you’d do something like this:</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">present</span> <span class="kt">bool</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="k">var</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">arr</span><span class="p">;</span> <span class="n">do</span> <span class="p">{</span>
+     <span class="k">if</span> <span class="k">var</span> <span class="o">==</span> <span class="m">2</span> <span class="p">{</span>
+         <span class="n">present</span> <span class="o">=</span> <span class="no">true</span>
+         <span class="k">break</span>
+     <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">present</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In V:</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">println</span><span class="p">(</span><span class="m">2</span> <span class="n">in</span> <span class="n">arr</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="--methods-on-primitive-types">- Methods on primitive types</h4>
+<p>In Go, you’d do something like this:</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Given string `s`</span>
+<span class="n">strings</span><span class="o">.</span><span class="n">Replace</span><span class="p">(</span><span class="n">strings</span><span class="o">.</span><span class="n">Replace</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">"a"</span><span class="p">,</span> <span class="s">"A"</span><span class="p">,</span> <span class="o">-</span><span class="m">1</span><span class="p">),</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"B"</span><span class="p">,</span> <span class="o">-</span><span class="m">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Whereas in V:</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Given string `s`</span>
+<span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sc">'a'</span><span class="p">,</span> <span class="sc">'A'</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sc">'b'</span><span class="p">,</span> <span class="sc">'B'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="--quick-append-to-string">- Quick append to string</h4>
+<p>In Go:</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Given string 's'</span>
+<span class="n">s</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">"owo"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In V:</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Given string 's'</span>
+<span class="n">s</span> <span class="o">+=</span> <span class="s">"owo"</span>
+</code></pre></div></div>
+<p><br /></p>
+<h4 id="now-that-was-a-lot-of-syntax"><strong>Now that was a lot of syntax.</strong></h4>
+
+<h3 id="crazy-fast-compilation">Crazy fast compilation</h3>
+<p>V transpiles your code into C before compiling it, so it finishes shockingly quick. I’m talking <strong>half a second</strong> quick. You won’t believe it until you try it.</p>
+
+<p><br /></p>
+
+<h3 id="live-updates">Live updates</h3>
+<p>V supports having a running program automatically update itself when code is compiled. This makes figuring out small bugs a breeze.</p>
+
+<p><br /></p>
+
+<h3 id="wide-range-of-official-libraries">Wide range of official libraries</h3>
+<p>The V libraries comprise <a href="https://github.com/vlang/V/tree/master/examples">many, many different applications.</a></p>
+
+<p><br /></p>
+
+<h3 id="control-over-memory-management-methods">Control over memory management methods</h3>
+<p>V is memory safe and efficient by default. However, V also provides <a href="https://github.com/vlang/v/blob/master/doc/docs.md#memory-management">many methods to manage memory.</a></p>
+
+<p><br /></p>
+
+<h3 id="transpile-c--v">Transpile C –&gt; V</h3>
+<p>You can even translate DOOM into V code. <a href="https://www.youtube.com/watch?v=6oXrz3oRoEg">I’m not joking.</a></p>
+
+<p><br /></p>
+
+<h2 id="cons">Cons</h2>
+<h3 id="only-one-variable-declaration-method">Only one variable declaration method</h3>
+<p>V only supports the <code class="language-plaintext highlighter-rouge">n := val</code> method of declaration; it does <em>not</em> support <code class="language-plaintext highlighter-rouge">var n int</code>, which I use in Go frequently.</p>
+
+<p><br /></p>
+
+<h3 id="lacking-library-support">Lacking library support</h3>
+<p>As with most small programming languages, a lot of niche topics are not covered by people’s open source projects. This could be a killer in some situations, as dealing with some APIs via straight web requests is even more of a pain than just using another language entirely.</p>
+
+<p><br />
+<br />
+<br /></p>
+
+<h2 id="final-thoughts">Final thoughts</h2>
+<p>Despite what the former content may lead you to believe, I am not maining V in the forseeable future. Go gives me nearly all of the tools I need, and does so in an almost-perfect fashion. For some projects, however, V shines on top, especially for quick scripts. Anyways, my blog post for the month of March is done, so that’s good enough for me. Thank you for reading!</p>]]></content><author><name></name></author><category term="programming" /><summary type="html"><![CDATA[As many of you know, the programming language I am most comfortable with is Go. However, just because a language is comfortable doesn’t mean it’s perfect. Enter V. V's incredibly adorable mascot, the Veasel. Pros Where do I even begin? The syntax According to their website, V’s syntax is about 80% identical to that of Go. Using the language, I believe it. Using V feels like Go on steroids sometimes. Here are some of the most important syntax changes for me: - Error checks In Go, error checks are frequent and bulky: var, err := someFunction(); if err != nil { panic(err) } Compare this to V, which simplifies it to: var := someFunction() or { panic(err) } As you can see, much cleaner. - Checking for presence in an array In Go, to check for a value in an array, you’d do something like this: var present bool for _, var := range arr; do { if var == 2 { present = true break } } fmt.Println(present) In V: println(2 in arr) - Methods on primitive types In Go, you’d do something like this: // Given string `s` strings.Replace(strings.Replace(s, "a", "A", -1), "b", "B", -1) Whereas in V: // Given string `s` s.replace('a', 'A').replace('b', 'B') - Quick append to string In Go: // Given string 's' s = append(s, "owo") In V: // Given string 's' s += "owo" Now that was a lot of syntax. Crazy fast compilation V transpiles your code into C before compiling it, so it finishes shockingly quick. I’m talking half a second quick. You won’t believe it until you try it. Live updates V supports having a running program automatically update itself when code is compiled. This makes figuring out small bugs a breeze. Wide range of official libraries The V libraries comprise many, many different applications. Control over memory management methods V is memory safe and efficient by default. However, V also provides many methods to manage memory. Transpile C –&gt; V You can even translate DOOM into V code. I’m not joking. Cons Only one variable declaration method V only supports the n := val method of declaration; it does not support var n int, which I use in Go frequently. Lacking library support As with most small programming languages, a lot of niche topics are not covered by people’s open source projects. This could be a killer in some situations, as dealing with some APIs via straight web requests is even more of a pain than just using another language entirely. Final thoughts Despite what the former content may lead you to believe, I am not maining V in the forseeable future. Go gives me nearly all of the tools I need, and does so in an almost-perfect fashion. For some projects, however, V shines on top, especially for quick scripts. Anyways, my blog post for the month of March is done, so that’s good enough for me. Thank you for reading!]]></summary></entry><entry><title type="html">I have a blog now, I guess</title><link href="http://localhost:4000/blog/meta/2023/02/20/i-have-a-blog-now.html" rel="alternate" type="text/html" title="I have a blog now, I guess" /><published>2023-02-20T19:30:00-05:00</published><updated>2023-02-20T19:30:00-05:00</updated><id>http://localhost:4000/blog/meta/2023/02/20/i-have-a-blog-now</id><content type="html" xml:base="http://localhost:4000/blog/meta/2023/02/20/i-have-a-blog-now.html"><![CDATA[<h2 id="so-apparently-i-have-a-blog-now">So apparently I have a blog now.</h2>
 
 <p>I know what you’re thinking.</p>
 
