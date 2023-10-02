@@ -9,7 +9,7 @@ Hey, it's been a while :)
 
 <br>
 
-Here's a quick post to hopefully help someone desperately googling.  **"How do I make hold and release keybinds for Waybar on Hyprland?"**
+Here's a quick post to hopefully help someone desperately googling,  **"How do I make hold and release keybinds for Waybar on Hyprland?"**
 
 The current returned results on Google aren't very helpful. You'll see some people on the right track, but there's lots of complicated solutions compared to what (imo) is the best solution to take. Here are two steps.
 
